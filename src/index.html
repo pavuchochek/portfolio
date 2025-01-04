@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,24 +15,51 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav class="border-gray-200 px-4 lg:px-6 py-2.5 bg-blue_background text-white">
             <div class="flex flex-wrap justify-between mx-auto max-w-screen-xl">
-                <div class="hidden justify-end items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2"></div>
+                <div class="hidden justify-end items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                </div>
                 <ul class="flex flex-col mt-4 font-extrabold lg:flex-row lg:space-x-8 lg:mt-0 text-2xl ml-auto">
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white">ME CONTACTER</a>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:text-gold">ME CONTACTER</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white">COMPETENCES</a>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:text-gold">COMPETENCES</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white">MON CV</a>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:text-gold">MON CV</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+    <main>
+        <section class="text-black relative h-screen flex  items-center justify-center">
+            <!-- Conteneur global -->
+            <div class="relative w-72 flex justify-center items-center">
+                <!-- Cercle de fond -->
+                <div class="w-36 h-36 bg-blue_background rounded-full"></div>
+                
+                <!-- Vecteur déco -->
+                <img src="./img/deco_pp.svg" 
+                     class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-56">
+            </div>
+            
+        
+            <!-- Texte principal -->
+            <div class="mt-6 text-center">
+                <h1 class="text-5xl font-bold">SOFIA GRIBANOVA</h1>
+                <p class="text-2xl mt-2">21 ans | Toulouse, France</p>
+                <p class="text-2xl mt-4 max-w-xl">
+                    Futur tech lead, déterminée à transformer des idées complexes en solutions simples et efficaces.
+                </p>
+            </div>
+        </section>
+        
+    </main>
 </body>
+
 </html>
