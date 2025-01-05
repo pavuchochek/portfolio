@@ -50,27 +50,23 @@
         </a>
         <section class="flex flex-col items-center justify-center mt-10">
             <h2 class="text-3xl font-bold mb-6">Contactez-moi</h2>
-            <form class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
+            <form class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md" 
+            action="https://formspree.io/f/xjkkpelg"
+            method="POST">
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                         Email
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Votre email">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">
-                        Sujet
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text" placeholder="Sujet">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" name="email" placeholder="Votre email">
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
                         Message
                     </label>
-                    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="5" placeholder="Votre message"></textarea>
+                    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" rows="5" name="message" placeholder="Votre message"></textarea>
                 </div>
                 <div class="flex items-center justify-between">
-                    <button class="bg-blue_background hover:animate-blink text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    <button class="bg-blue_background hover:animate-blink text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Envoyer
                     </button>
                 </div>
