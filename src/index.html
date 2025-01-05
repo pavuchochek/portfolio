@@ -16,8 +16,9 @@
     </style>
 </head>
 
-    <body class="bg-cover bg-center bg-[url('./img/background.jpg')]" >
-        <canvas id="particles-canvas"></canvas>
+<body class="bg-cover bg-no-repeat bg-center bg-fixed" style="background-image: url('./img/background.jpg');">
+
+    <canvas id="particles-canvas"></canvas>
     <header>
         <nav class="border-gray-200 px-4 lg:px-6 py-2.5 bg-blue_background text-white">
             <div class="flex flex-wrap justify-between mx-auto max-w-screen-xl">
@@ -31,6 +32,9 @@
                         <a href="#" class="block py-2 pr-4 pl-3 text-white hover:text-gold">COMPETENCES</a>
                     </li>
                     <li>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:text-gold">PROJETS</a>
+                    </li>
+                    <li>
                         <a href="#" class="block py-2 pr-4 pl-3 text-white hover:text-gold">MON CV</a>
                     </li>
                 </ul>
@@ -38,102 +42,111 @@
         </nav>
     </header>
     <main>
-        <div class="flex flex-col">
-            <section class="text-black relative flex  items-center justify-center">
-                <!-- Conteneur global -->
+        <div class="grid grid-rows-[auto_1fr] grid-cols-3 gap-x-12 w-3/4 m-auto mt-10">
+            <!-- Photo et description : Première ligne -->
+            <div class="col-span-3 flex items-center mb-12">
+                <!-- Photo à gauche -->
                 <div class="relative w-72 flex justify-center items-center">
-                    <!-- Cercle de fond -->
-                    <div class="w-36 h-36 bg-blue_background rounded-full"></div>
-
-                    <!-- Vecteur déco -->
+                    <div class="w-36 h-36 bg-blue_background rounded-full items-center justify-center flex">
+                        <img src="./img/my_photo.jpg" class="w-32 h-32 rounded-full">
+                    </div>
                     <img src="./img/deco_pp.svg"
                         class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-56">
                 </div>
-
-
-                <!-- Texte principal -->
-                <div class="mt-6 text-center">
-                    <h1 class="text-5xl font-bold">SOFIA GRIBANOVA</h1>
+                <!-- Description à droite -->
+                <div class="ml-12 text-left">
+                    <h1 class="text-4xl font-bold">SOFIA GRIBANOVA</h1>
                     <p class="text-2xl mt-2">21 ans | Toulouse, France</p>
-                    <p class="text-2xl mt-4 max-w-xl">
+                    <p class="text-2xl mt-4 w-full">
                         Futur tech lead, déterminée à transformer des idées complexes en solutions simples et efficaces.
                     </p>
                 </div>
-            </section>
-            <section class="grid grid-cols-[1fr_2fr_2fr] gap-x-4 ml-28 mr-28">
-
-                <img src="./img/portfolio_inspiration_2.png" class="w-auto h-auto">
-                <div class="flex flex-col space-y-28">
-                    <div>
-                        <div class="text-white font-bold flex justify-start items-center relative mb-4 ">
-                            <img src="./img/bg_comp.svg" class="w-80 h-auto">
-                            <p class="absolute left-20 text-2xl">INTELLECT</p>
-                        </div>
-                        <ul class="text-xl list-image-[url(./img/one_point.svg)] space-y-4">
-                            <li>Développement back-end et front-end</li>
-                            <li>Optimisation de code</li>
-                        </ul>
+            </div>
+    
+            <!-- Colonne 1 -->
+            <div>
+                <img src="./img/portfolio_inspiration_2.png" class="w-1/2 h-auto">
+            </div>
+             <!-- Colonne 2 -->
+            
+            <div class="flex flex-col space-y-28">
+                <div>
+                    <div class="text-white font-bold flex justify-start items-center relative mb-4">
+                        <img src="./img/bg_comp.svg" class="w-80 h-auto">
+                        <p class="absolute left-20 text-2xl">INTELLECT</p>
                     </div>
-                    <div>
-                        <div class="text-white font-bold flex justify-start items-center relative mb-4 ">
-                            <img src="./img/bg_comp.svg" class="w-80 h-auto">
-                            <p class="absolute left-20 text-2xl">CHARISME</p>
-                        </div>
-                        <ul class="text-xl list-image-[url(./img/one_point.svg)] space-y-4">
-                            <li>Leadership en devenir</li>
-                            <li>Créativité dans les solutions</li>
-                        </ul>
+                    <ul class="text-xl list-image-[url(./img/one_point.svg)] space-y-4">
+                        <li>Développement back-end et front-end</li>
+                        <li>Optimisation de code</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-white font-bold flex justify-start items-center relative mb-4">
+                        <img src="./img/bg_comp.svg" class="w-80 h-auto">
+                        <p class="absolute left-20 text-2xl">CHARISME</p>
                     </div>
-                    <div>
-                        <div class="text-white font-bold flex justify-start items-center relative mb-4 ">
-                            <img src="./img/bg_comp.svg" class="w-80 h-auto">
-                            <p class="absolute left-20 text-2xl">AGILITE</p>
-                        </div>
-                        <ul class="text-xl list-image-[url(./img/one_point.svg)] space-y-4">
-                            <li>Adaptabilité technologique</li>
-                            <li>Polyvalence en langages</li>
-                            <li>Apprentissage rapide</li>
-                        </ul>
+                    <ul class="text-xl list-image-[url(./img/one_point.svg)] space-y-4">
+                        <li>Leadership en devenir</li>
+                        <li>Créativité dans les solutions</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="text-white font-bold flex justify-start items-center relative mb-4">
+                        <img src="./img/bg_comp.svg" class="w-80 h-auto">
+                        <p class="absolute left-20 text-2xl">AGILITE</p>
+                    </div>
+                    <ul class="text-xl list-image-[url(./img/one_point.svg)] space-y-4">
+                        <li>Adaptabilité technologique</li>
+                        <li>Polyvalence en langages</li>
+                        <li>Apprentissage rapide</li>
+                    </ul>
+                </div>
+            </div>
+    
+           
+    
+            <!-- Colonne 3 -->
+            <div class="flex flex-col space-y-8">
+                <div class="space-y-4">
+                    <div class="text-white font-bold flex justify-center items-center relative w-fit space-x-6">
+                        <img src="./img/bg_comp.svg" class="w-80 h-auto">
+                        <p class="absolute text-2xl">COMP.SPECIALE</p>
+                    </div>
+                    <h1 class="text-2xl">Architecte du code</h1>
+                    <div class="bg-gold rounded-lg border border-black w-auto h-auto p-3">
+                        <p class="p-3 text-xl text-center">
+                            Ma maîtrise de l'architecture de code me permet de concevoir des structures élégantes,
+                            performantes et parfaitement adaptées aux besoins, transformant chaque projet en une œuvre technique et fonctionnelle.
+                        </p>
                     </div>
                 </div>
-                <div class="flex flex-col space-y-8">
-                    <div class="space-y-4">
-                        <div class="text-white font-bold flex justify-center items-center relative w-fit space-x-6">
-                            <img src="./img/bg_comp.svg" class="w-80 h-auto">
-                            <p class="absolute text-2xl">COMP.SPECIALE</p>
-                        </div>
-                        <h1 class="text-2xl">Architecte du code</h1>
-                        <div class="bg-gold rounded-lg border border-black w-auto h-60">
-                            <p class="p-3 text-xl text-center">Ma maîtrise de l'architecture de code me permet de concevoir des structures élégantes,
-                                performantes et parfaitement adaptées aux besoins, transformant chaque projet en une
-                                œuvre technique et fonctionnelle.</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-center items-center mt-60">
-                        <button class="bg-blue_background text-white p-5 w-72 m-3 text-2xl">VOIR MES PROJETS</button>
-                        <button class="bg-gold p-5 w-72 m-3 text-2xl">VOIR MON PARCOURS</button>
-                    </div>
+                <div class="flex flex-col justify-center items-center mt-60">
+                    <button class="bg-blue_background text-white p-5 w-72 m-3 text-2xl">VOIR MES PROJETS</button>
+                    <button class="bg-gold p-5 w-72 m-3 text-2xl">VOIR MON PARCOURS</button>
                 </div>
-            </section>
+            </div>
         </div>
     </main>
+    
+    
+    
     <script>
         // Sélection du canvas et ajustement
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-    
+
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
         });
-    
+
         // Configuration des particules
         let particlesArray = [];
         const particleCount = 100; // Nombre de particules
-    
+
         class Particle {
             constructor(x, y, size, speedX, speedY, color) {
                 this.x = x;
@@ -143,24 +156,24 @@
                 this.speedY = speedY;
                 this.color = color;
             }
-    
+
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
                 ctx.fill();
             }
-    
+
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-    
+
                 // Rebondissement sur les bords
                 if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
                 if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
         }
-    
+
         function initParticles() {
             particlesArray = [];
             for (let i = 0; i < particleCount; i++) {
@@ -176,7 +189,7 @@
                 particlesArray.push(new Particle(x, y, size, speedX, speedY, color));
             }
         }
-    
+
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particlesArray.forEach((particle) => {
@@ -185,11 +198,11 @@
             });
             requestAnimationFrame(animateParticles);
         }
-    
+
         initParticles();
         animateParticles();
     </script>
-    
+
 
     <style>
         #particles-canvas {
@@ -198,8 +211,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Derrière tout le contenu */
-            pointer-events: none; /* Empêche les interactions */
+            z-index: -1;
+            /* Derrière tout le contenu */
+            pointer-events: none;
+            /* Empêche les interactions */
         }
     </style>
 </body>
