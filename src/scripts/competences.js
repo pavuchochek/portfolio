@@ -1,136 +1,230 @@
 const graphData = [
-  { id: "analyser", title: "Analyser", x: 150, y: -100, description: "Analyser les besoins pour proposer des solutions optimales." },
-  { id: "concevoir", title: "Concevoir", x: -150, y: -100, description: "Concevoir des architectures adaptées aux besoins." },
-  { id: "gerer", title: "Gérer", x: 200, y: 100, description: "Planifier et gérer les projets efficacement." },
-  { id: "maintenir", title: "Maintenir", x: -200, y: 100, description: "Assurer la maintenance des systèmes existants." },
-  { id: "optimiser", title: "Optimiser", x: 0, y: 200, description: "Améliorer les performances des applications." }
+  {
+    id: "analyser",
+    title: "Analyser",
+    x: 150,
+    y: -100,
+    description: "Analyser les besoins pour proposer des solutions optimales.",
+    noeuds: [
+      {
+        title: "Python",
+        projets: [
+          { id: "proj1", titre: "Projet 1", description: "Description du projet 1" },
+          { id: "proj2", titre: "Projet 2", description: "Description du projet 2" },
+        ],
+      },
+      { title: "Django", projets: [] },
+    ],
+  },
+  {
+    id: "concevoir",
+    title: "Concevoir",
+    x: -150,
+    y: -100,
+    description: "Concevoir des architectures adaptées aux besoins.",
+    noeuds: [
+      { title: "React", projets: [{ id: "proj3", titre: "Projet 3", description: "Description du projet 3" }] },
+      { title: "Node.js", projets: [] },
+    ],
+  },
+  {
+    id: "gerer",
+    title: "Gérer",
+    x: 200,
+    y: 100,
+    description: "Planifier et gérer les projets efficacement.",
+    noeuds: [
+      { title: "Agile", projets: [{ id: "proj4", titre: "Projet 4", description: "Description du projet 4" }] },
+      { title: "Scrum", projets: [{ id: "proj5", titre: "Projet 5", description: "Description du projet 5" }] },
+    ],
+  },
 ];
 
-const graphContainer = document.getElementById("graph-container");
-const skillsContainer = document.getElementById("skills");
-const popup = document.getElementById("popup");
-const popupOverlay = document.getElementById("popup-overlay");
 
-let circles = [];
-let lines = [];
-let isAnimating = false; // Verrou pour éviter les animations simultanées
 
-function createCircle(skill) {
+const skillsContainer = document.getElementById("skills-container");
+
+// Met à jour le contenu de la div fixe
+function updateSkillDetails(skill) {
+  document.getElementById("skill-title").innerText = skill.title;
+  document.getElementById("skill-description").innerText = skill.description;
+}
+
+// Fonction pour créer un skill principal
+function createCircle(skill, index) {
+  const { x, y } = calculateSkillPosition(index); // Positionner le skill (haut, gauche, droite)
+
   const circle = document.createElement("div");
-  circle.id = skill.id;
   circle.className = "circle";
-  circle.style.left = `${window.innerWidth / 2 + skill.x}px`;
-  circle.style.top = `${window.innerHeight / 2 + skill.y}px`;
+  circle.style.left = `${x - 50}px`; // Centrer le cercle en fonction de sa position
+  circle.style.top = `${y - 50}px`;  // Centrer le cercle en fonction de sa position
   circle.innerText = skill.title;
 
-  circle.addEventListener("click", () => showPopup(skill));
-  circle.addEventListener("mouseenter", () => centerCircle(circle));
-  circle.addEventListener("mouseleave", resetCircles);
+  // Sélectionne un skill au clic
+  circle.addEventListener("click", () => {
+    document.querySelectorAll(".circle").forEach(c => c.classList.remove("selected"));
+    circle.classList.add("selected");
+    updateSkillDetails(skill);
+  });
+
+  // Déterminer la position du skill principal pour ajuster les positions des nœuds
+  const skillPosition = index === 0 ? 'haut' : (index === 1 ? 'gauche' : 'droite');
+
+  // Ajouter les nœuds dépendants en fonction de la position du skill principal
+  skill.noeuds.forEach((noeud, nodeIndex) => {
+    const noeudElement = createDependentNode(noeud,circle, skillPosition);
+    circle.appendChild(noeudElement);
+  });
 
   skillsContainer.appendChild(circle);
-  circles.push({ skill, element: circle });
-  return circle;
 }
 
-function showPopup(skill) {
-  popup.innerHTML = `
-    <div class="popup-content">
-      <span class="close">&times;</span>
-      <h2>${skill.title}</h2>
-      <p>${skill.description}</p>
-    </div>
-  `;
-  popup.classList.add("active");
-  popupOverlay.classList.add("active");
+// Fonction qui calcule la position en fonction du skill (haut, gauche, droite)
+function calculateSkillPosition(index) {
+  const distance = 200; // Distance entre le centre et chaque skill
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
 
-  document.querySelector(".close").addEventListener("click", closePopup);
+  switch (index) {
+    case 0: // Premier skill (en haut)
+      return { x: centerX, y: centerY - distance };
+    case 1: // Deuxième skill (à gauche)
+      return { x: centerX - distance, y: centerY };
+    case 2: // Troisième skill (à droite)
+      return { x: centerX + distance, y: centerY };
+    default:
+      return { x: centerX, y: centerY };
+  }
 }
 
-function closePopup() {
-  popup.classList.remove("active");
-  popupOverlay.classList.remove("active");
-}
 
-function createLine(circle1, circle2) {
-  const line = document.createElement("div");
-  line.className = "line";
+let activeProjetsContainer = null; // Référence au conteneur actif
+// Fonction pour créer un nœud dépendant
+function createDependentNode(noeud, circleElement,skillPosition) {
+  const nodeElement = document.createElement("div");
+  nodeElement.className = "dependent-circle";
 
-  const updateLine = () => {
-    const rect1 = circle1.getBoundingClientRect();
-    const rect2 = circle2.getBoundingClientRect();
-    const x1 = rect1.left + rect1.width / 2;
-    const y1 = rect1.top + rect1.height / 2;
-    const x2 = rect2.left + rect2.width / 2;
-    const y2 = rect2.top + rect2.height / 2;
+  // Récupérer les coordonnées du skill principal (cercle parent)
+  const circleX = parseInt(circleElement.style.left, 10) + 50; // Le +50 pour prendre en compte la taille du cercle
+  const circleY = parseInt(circleElement.style.top, 10) + 50;  // Le +50 pour prendre en compte la taille du cercle
 
-    const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
+  // Positionner le nœud dépendant en fonction de la position du skill principal
+  switch (skillPosition) {
+    case 'haut':
+      nodeElement.style.left = `${circleX}px`;
+      nodeElement.style.top = `${circleY + 150}px`;
+      break;
+    case 'gauche':
+      nodeElement.style.left = `${circleX + 150}px`;
+      nodeElement.style.top = `${circleY}px`;
+      break;
+    case 'droite':
+      nodeElement.style.left = `${circleX - 150}px`;
+      nodeElement.style.top = `${circleY}px`;
+      break;
+  }
+  nodeElement.innerText = noeud.title;
 
-    line.style.width = `${distance}px`;
-    line.style.left = `${x1}px`;
-    line.style.top = `${y1}px`;
-    line.style.transform = `rotate(${angle}deg) translateY(-50%)`;
-  };
+  // Ajoute la notification si des projets sont associés
+  if (noeud.projets && noeud.projets.length > 0) {
+    const notification = document.createElement("div");
+    notification.className = "notification";
+    notification.innerText = noeud.projets.length;
+    nodeElement.appendChild(notification);
+  }
 
-  updateLine();
-  graphContainer.appendChild(line);
-  lines.push({ element: line, updateLine });
-}
+  // Ajoute le conteneur des projets
+  const projetsContainer = document.createElement("div");
+  projetsContainer.className = "projets-container";
+  nodeElement.appendChild(projetsContainer);
 
-function centerCircle(circle) {
-  if (isAnimating) return; // Évite de déclencher plusieurs animations en parallèle
-  isAnimating = true;
-
-  circles.forEach(({ element }) => {
-    if (element !== circle) {
-      element.style.opacity = "0.5";
-      element.style.transform = "scale(0.9)";
-    } else {
-      element.style.opacity = "1";
-      element.style.transform = "scale(1.5)";
-      element.style.transition = "all 0.5s ease";
-      element.style.left = `${window.innerWidth / 2 - 50}px`;
-      element.style.top = `${window.innerHeight / 2 - 50}px`;
-    }
+  // Gestion du clic pour afficher les projets associés
+  nodeElement.addEventListener("click", (event) => {
+    event.stopPropagation(); // Empêche le clic de se propager à d'autres éléments
+    toggleProjetsDisplay(noeud, projetsContainer);
   });
 
-  requestAnimationFrame(() => {
-    updateLines(); // Met à jour les lignes une seule fois
-    isAnimating = false;
-  });
+  return nodeElement;
 }
 
-function resetCircles() {
-  if (isAnimating) return; // Évite les conflits entre animations
 
-  circles.forEach(({ skill, element }) => {
-    element.style.opacity = "1";
-    element.style.transform = "scale(1)";
-    element.style.left = `${window.innerWidth / 2 + skill.x}px`;
-    element.style.top = `${window.innerHeight / 2 + skill.y}px`;
-    element.style.transition = "all 0.5s ease";
-  });
+function toggleProjetsDisplay(noeud, container) {
+  // Ferme le conteneur actif s'il existe et est différent du conteneur actuel
+  if (activeProjetsContainer && activeProjetsContainer !== container) {
+    activeProjetsContainer.classList.remove("active");
+    activeProjetsContainer.innerHTML = "";
+  }
 
-  requestAnimationFrame(() => {
-    updateLines(); // Met à jour les lignes après la réinitialisation
-  });
+  // Active ou désactive le conteneur actuel
+  if (container.classList.contains("active")) {
+    container.classList.remove("active");
+    container.innerHTML = "";
+    activeProjetsContainer = null; // Réinitialise le conteneur actif
+  } else {
+    container.classList.add("active");
+    container.innerHTML = `
+      <h4>Projets associés</h4>
+      ${noeud.projets.length > 0
+        ? noeud.projets
+            .map(
+              (projet) => `
+            <div class="projet">
+              <h5>${projet.titre}</h5>
+              <p>${projet.description}</p>
+              ${projet.lien ? `<a href="${projet.lien}" target="_blank">Voir plus</a>` : ""}
+            </div>
+          `
+            )
+            .join("")
+        : "<p>Aucun projet disponible</p>"}
+    `;
+    activeProjetsContainer = container; // Définit le conteneur actif
+  }
 }
 
-function updateLines() {
-  lines.forEach(({ updateLine }) => updateLine());
-}
+// Ferme les projets associés lorsqu'on clique en dehors
+document.addEventListener("click", () => {
+  if (activeProjetsContainer) {
+    activeProjetsContainer.classList.remove("active");
+    activeProjetsContainer.innerHTML = "";
+    activeProjetsContainer = null; // Réinitialise le conteneur actif
+  }
+});
+
 
 function initializeGraph() {
-  graphData.forEach((skill, i) => {
-    const circle1 = createCircle(skill);
-    if (i > 0) {
-      const circle2 = circles[i - 1].element;
-      createLine(circle1, circle2);
-    }
-  });
-
-  createLine(circles[0].element, circles[circles.length - 1].element);
+  graphData.forEach((skill, index) => createCircle(skill, index)); // On passe l'index pour chaque skill
+  if (graphData.length > 0) {
+    const firstCircle = document.querySelector(".circle");
+    firstCircle.classList.add("selected");
+    updateSkillDetails(graphData[0]);
+  }
 }
 
-popupOverlay.addEventListener("click", closePopup);
 initializeGraph();
+// Fonction pour ajuster l'opacité du fond en fonction du scroll
+function adjustBackgroundOnScroll() {
+  const skillsContainer = document.getElementById("skills-container");
+  const rect = skillsContainer.getBoundingClientRect(); // Position de la section dans la fenêtre
+  const windowHeight = window.innerHeight;
+
+  // Si la section est dans la fenêtre (partiellement ou totalement)
+  if (rect.top <= windowHeight && rect.bottom >= 0) {
+    // Calcul de l'opacité en fonction de la distance scrollée
+    const scrollProgress = (window.scrollY + windowHeight - rect.top) / (windowHeight + rect.height); // Progression du scroll
+    const opacity = Math.min(0.7, scrollProgress * 0.7); // L'opacité augmente à mesure qu'on descend, max à 0.7
+
+    // Applique l'effet d'assombrissement
+    document.body.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+  } else {
+    // Réinitialise le fond si la section est hors de la fenêtre
+    document.body.style.backgroundColor = "transparent";
+  }
+}
+
+// Écouteur de l'événement scroll
+window.addEventListener("scroll", adjustBackgroundOnScroll);
+
+// Applique un ajustement initial au chargement
+adjustBackgroundOnScroll();
+

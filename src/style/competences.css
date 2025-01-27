@@ -1,62 +1,117 @@
-#graph-container {
+#skills-container {
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
 }
 
-.circle {
+/* Conteneur de chaque branche */
+.branch-container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cercle principal */
+.circle {
+  position: relative;
   width: 100px;
   height: 100px;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 4px solid #4caf50; /* Premier contour */
+  box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.5); /* Deuxième contour (espacé) */
+}
+
+.circle.selected {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.7), 0 0 15px rgba(76, 175, 80, 0.9); /* Accentuation des contours */
+}
+
+/* Nœud dépendant */
+.dependent-circle {
+  width: 150px;
+  height: auto;
+  background: transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #2196f3;
+  box-shadow: 0 0 0 6px rgba(33, 150, 243, 0.4);
+}
+
+
+/* Popup fixe */
+.fixed-popup {
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  padding: 20px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.fixed-popup h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.fixed-popup p {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+/* Notification pour les nœuds */
+.notification {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background: red;
   color: white;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.8rem;
   font-weight: bold;
-  transition: all 0.5s ease;
-  cursor: pointer;
 }
 
-.circle:hover {
-  transform: scale(1.2);
-}
-
-.line {
+/* Conteneur pour les projets associés */
+.projets-container {
   position: absolute;
-  background-color: white;
-  transition: all 0.5s ease;
-}
-
-#popup {
-  position: fixed;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  display: none;
-  z-index: 1000;
+  left: 100%;
+  transform: translate(10px, -50%);
+  width: 200px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  display: none; /* Caché par défaut */
 }
 
-#popup.active {
-  display: block;
+.projets-container.active {
+  display: block; /* Affiche les projets quand le nœud est sélectionné */
 }
-
-#popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  z-index: 999;
-}
-
-#popup-overlay.active {
-  display: block;
+body {
+  transition: background-color 0.3s ease-in-out;
 }
