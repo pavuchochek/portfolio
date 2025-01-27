@@ -202,29 +202,29 @@ function initializeGraph() {
 }
 
 initializeGraph();
-// Fonction pour ajuster l'opacité du fond en fonction du scroll
-function adjustBackgroundOnScroll() {
-  const skillsContainer = document.getElementById("skills-container");
-  const rect = skillsContainer.getBoundingClientRect(); // Position de la section dans la fenêtre
-  const windowHeight = window.innerHeight;
+// Fonction pour ajuster l'opacité de l'overlay en fonction du scroll
+function adjustOverlayOnScroll() {
+  const overlay = document.getElementById("background-overlay");
+  const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight); // Pourcentage du scroll
+  const opacity = Math.min(0.7, scrollProgress * 0.7); // Limite l'opacité à 0.7
 
-  // Si la section est dans la fenêtre (partiellement ou totalement)
-  if (rect.top <= windowHeight && rect.bottom >= 0) {
-    // Calcul de l'opacité en fonction de la distance scrollée
-    const scrollProgress = (window.scrollY + windowHeight - rect.top) / (windowHeight + rect.height); // Progression du scroll
-    const opacity = Math.min(0.7, scrollProgress * 0.7); // L'opacité augmente à mesure qu'on descend, max à 0.7
-
-    // Applique l'effet d'assombrissement
-    document.body.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
-  } else {
-    // Réinitialise le fond si la section est hors de la fenêtre
-    document.body.style.backgroundColor = "transparent";
-  }
+  // Applique l'effet d'assombrissement sur l'overlay
+  overlay.style.background = `rgba(0, 0, 0, ${opacity})`;
 }
 
 // Écouteur de l'événement scroll
-window.addEventListener("scroll", adjustBackgroundOnScroll);
+window.addEventListener("scroll", adjustOverlayOnScroll);
 
 // Applique un ajustement initial au chargement
-adjustBackgroundOnScroll();
+adjustOverlayOnScroll();
+// Exemple d'animation pour les éléments qui apparaissent au scroll
+ScrollReveal().reveal('.anim-scroll', {
+  distance: '50px',
+  duration: 800,
+  easing: 'ease-in-out',
+  opacity: 0,
+  reset: true, // Animation répétée à chaque passage dans la vue
+});
+
+
 

@@ -19,11 +19,15 @@
     <script src="./scripts/particles.js"></script>
     <link rel="stylesheet" href="./style/particles.css">
     <link rel="stylesheet" href="./style/competences.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+
 </head>
+
 
 <body class="bg-cover bg-no-repeat bg-center bg-fixed h-screen" style="background-image: url('./img/background.jpg');">
 
     <canvas id="particles-canvas"></canvas>
+    <div id="background-overlay"></div>
     <header>
         <nav class="border-gray-200 px-4 lg:px-6 py-2.5 bg-blue_background text-white">
             <div class="flex flex-wrap justify-between mx-auto max-w-screen-xl">
@@ -47,7 +51,7 @@
         </nav>
     </header>
     <main>
-        <div class="grid grid-rows-[auto_1fr] grid-cols-3 gap-x-12 w-3/4 m-auto mt-10">
+        <div class="grid anim-scroll grid-rows-[auto_1fr] grid-cols-3 gap-x-12 w-3/4 m-auto mt-10">
             <!-- Photo et description : Première ligne -->
             <div class="col-span-3 flex items-center mb-12">
                 <!-- Photo à gauche -->
@@ -131,11 +135,11 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div class="text-center text-4xl font-bold mt-20">
+        <div >
+            <div class="text-center text-4xl font-bold mt-20 anim-scroll">
                 <p>Competences techniques</p>
             </div>
-            <div id="graph-container">
+            <div id="graph-container " class="anim-scroll">
         
                 <div id="skills-container"></div>
 
