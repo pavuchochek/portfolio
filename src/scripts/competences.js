@@ -1,64 +1,58 @@
 const graphData = [
-  {
-    id: "analyser",
-    title: "Analyser",
-    x: 150,
-    y: -100,
-    description: "Analyser les besoins pour proposer des solutions optimales.",
-    noeuds: [
-      {
-        title: "Python",
-        projets: [
-          { id: "proj1", titre: "Projet 1", description: "Description du projet 1" },
-          { id: "proj2", titre: "Projet 2", description: "Description du projet 2" },
-        ],
-      },
-      { title: "Django", projets: [] },
-    ],
-  },
-  {
-    id: "concevoir",
-    title: "Concevoir",
-    x: -150,
-    y: -100,
-    description: "Concevoir des architectures adaptées aux besoins.",
-    noeuds: [
-      { title: "React", projets: [{ id: "proj3", titre: "Projet 3", description: "Description du projet 3" }] },
-      { title: "Node.js", projets: [] },
-    ],
-  },
-  {
-    id: "gerer",
-    title: "Gérer",
-    x: 200,
-    y: 100,
-    description: "Planifier et gérer les projets efficacement.",
-    noeuds: [
-      { title: "Agile", projets: [{ id: "proj4", titre: "Projet 4", description: "Description du projet 4" }] },
-      { title: "Scrum", projets: [{ id: "proj5", titre: "Projet 5", description: "Description du projet 5" }] },
-    ],
-  },
+  { id: "analyser", title: "Analyser", description: "Analyser les besoins pour proposer des solutions optimales.",
+    noeuds:[{
+      id:"figma",
+      title:"Figma",
+      img:"./images/figma.png",
+   },{
+      id:"example",
+      title:"Example",
+      img:"./images/figma.png",
+   },{
+      id:"example2",
+      title:"Example2",
+      img:"./images/figma.png",
+   }] },
+  { id: "concevoir", title: "Concevoir", description: "Concevoir des architectures adaptées aux besoins." },
+  { id: "gerer", title: "Gérer", description: "Planifier et gérer les projets efficacement." },
+  { id: "Administrer", title: "Administrer", description: "Administrer les systèmes et les bases de données." },
+  { id: "Collaborer", title: "Collaborer", description: "Travailler en équipe pour atteindre les objectifs." },
+  { id: "Optimiser", title: "Optimiser", description: "Optimiser les performances des applications." }
 ];
 
-
-
 const skillsContainer = document.getElementById("skills-container");
+const overlay = document.getElementById("background-overlay");
+// Fonction pour calculer la position des cercles sur un hexagone
+function calculateHexagonPosition(index, radius = 200) {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
 
-// Met à jour le contenu de la div fixe
-function updateSkillDetails(skill) {
-  document.getElementById("skill-title").innerText = skill.title;
-  document.getElementById("skill-description").innerText = skill.description;
+  // Hexagon angles : 0°, 60°, 120°, 180°, 240°, 300°
+  const hexagonAngles = [0, Math.PI / 3, 2 * Math.PI / 3, Math.PI, 4 * Math.PI / 3, 5 * Math.PI / 3];
+  
+  // Choisir l'angle en fonction de l'index
+  const angle = hexagonAngles[index];
+
+  // Calcul des positions en fonction de l'angle
+  const x = centerX + radius * Math.cos(angle);
+  const y = centerY + radius * Math.sin(angle);
+
+  return { x, y };
 }
 
-// Fonction pour créer un skill principal
+// Fonction pour créer un skill
 function createCircle(skill, index) {
-  const { x, y } = calculateSkillPosition(index); // Positionner le skill (haut, gauche, droite)
+  const { x, y } = calculateHexagonPosition(index);
 
   const circle = document.createElement("div");
   circle.className = "circle";
-  circle.style.left = `${x - 50}px`; // Centrer le cercle en fonction de sa position
-  circle.style.top = `${y - 50}px`;  // Centrer le cercle en fonction de sa position
+  circle.style.left = `${x - 50}px`; // Centrage du cercle en soustrayant la moitié de la largeur du cercle
+  circle.style.top = `${y - 50}px`;  // Idem pour la hauteur
   circle.innerText = skill.title;
+  //creation de la branche avec les noeuds et la position du skill
+  if(skill.noeuds){
+    createBranch(skill.noeuds, index);
+  }
 
   // Sélectionne un skill au clic
   circle.addEventListener("click", () => {
@@ -67,133 +61,66 @@ function createCircle(skill, index) {
     updateSkillDetails(skill);
   });
 
-  // Déterminer la position du skill principal pour ajuster les positions des nœuds
-  const skillPosition = index === 0 ? 'haut' : (index === 1 ? 'gauche' : 'droite');
-
-  // Ajouter les nœuds dépendants en fonction de la position du skill principal
-  skill.noeuds.forEach((noeud, nodeIndex) => {
-    const noeudElement = createDependentNode(noeud,circle, skillPosition);
-    circle.appendChild(noeudElement);
-  });
-
   skillsContainer.appendChild(circle);
 }
+// Fonction pour créer une branche avec des noeuds d'un skill en prenant en compte la position dans l'hexagone
+function createBranch(noeuds, positionDuSkill) {
+  //creation de la div branche du ce skill
+  const branch = document.createElement("div");
+  branch.className = "branch";
+  //calcul de la position de la branchen en fonction de la position du skill
+  const { x, y } = calculateBranchPosition(positionDuSkill);
+  branch.style.left = `${x - 50}px`; 
+  branch.style.top = `${y - 50}px`;  // Idem pour la hauteur
+  //parcours des noeuds
+  noeuds.forEach((noeud, index) => {
+    //calcul de la position du noeud en fonction de la position du skill
+    const { x, y } = calculateHexagonPosition(index, 150);
+    //creation de la div noeud
+    const node = document.createElement("div");
+    node.className = "node";
+    node.style.left = `${x - 50}px`; 
+    node.style.top = `${y - 50}px`;  // Idem pour la hauteur
+    //ajout du titre du noeud
+    node.innerText = noeud.title;
+    //ajout de l'image du noeud
+    const img = document.createElement("img");
+    img.src = noeud.img;
+    img.alt = noeud.title;
+    node.appendChild(img);
+    //ajout du noeud à la branche
+    branch.appendChild(node);
+  });
 
-// Fonction qui calcule la position en fonction du skill (haut, gauche, droite)
-function calculateSkillPosition(index) {
-  const distance = 200; // Distance entre le centre et chaque skill
+  skillsContainer.appendChild(branch);
+}
+
+//calcul de la position de la branche en rapport avec la position du skill
+function calculateBranchPosition(index, radius = 200) {
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight / 2;
 
-  switch (index) {
-    case 0: // Premier skill (en haut)
-      return { x: centerX, y: centerY - distance };
-    case 1: // Deuxième skill (à gauche)
-      return { x: centerX - distance, y: centerY };
-    case 2: // Troisième skill (à droite)
-      return { x: centerX + distance, y: centerY };
-    default:
-      return { x: centerX, y: centerY };
-  }
+  // Hexagon angles : 0°, 60°, 120°, 180°, 240°, 300°
+  const hexagonAngles = [0, Math.PI / 3, 2 * Math.PI / 3, Math.PI, 4 * Math.PI / 3, 5 * Math.PI / 3];
+  
+  // Choisir l'angle en fonction de l'index
+  const angle = hexagonAngles[index];
+
+  // Calcul des positions en fonction de l'angle
+  const x = centerX + radius * Math.cos(angle);
+  const y = centerY + radius * Math.sin(angle);
+
+  return { x, y };
+}
+// Met à jour le contenu de la div fixe
+function updateSkillDetails(skill) {
+  document.getElementById("skill-title").innerText = skill.title;
+  document.getElementById("skill-description").innerText = skill.description;
 }
 
-
-let activeProjetsContainer = null; // Référence au conteneur actif
-// Fonction pour créer un nœud dépendant
-function createDependentNode(noeud, circleElement,skillPosition) {
-  const nodeElement = document.createElement("div");
-  nodeElement.className = "dependent-circle";
-
-  // Récupérer les coordonnées du skill principal (cercle parent)
-  const circleX = parseInt(circleElement.style.left, 10) + 50; // Le +50 pour prendre en compte la taille du cercle
-  const circleY = parseInt(circleElement.style.top, 10) + 50;  // Le +50 pour prendre en compte la taille du cercle
-
-  // Positionner le nœud dépendant en fonction de la position du skill principal
-  switch (skillPosition) {
-    case 'haut':
-      nodeElement.style.left = `${circleX}px`;
-      nodeElement.style.top = `${circleY + 150}px`;
-      break;
-    case 'gauche':
-      nodeElement.style.left = `${circleX + 150}px`;
-      nodeElement.style.top = `${circleY}px`;
-      break;
-    case 'droite':
-      nodeElement.style.left = `${circleX - 150}px`;
-      nodeElement.style.top = `${circleY}px`;
-      break;
-  }
-  nodeElement.innerText = noeud.title;
-
-  // Ajoute la notification si des projets sont associés
-  if (noeud.projets && noeud.projets.length > 0) {
-    const notification = document.createElement("div");
-    notification.className = "notification";
-    notification.innerText = noeud.projets.length;
-    nodeElement.appendChild(notification);
-  }
-
-  // Ajoute le conteneur des projets
-  const projetsContainer = document.createElement("div");
-  projetsContainer.className = "projets-container";
-  nodeElement.appendChild(projetsContainer);
-
-  // Gestion du clic pour afficher les projets associés
-  nodeElement.addEventListener("click", (event) => {
-    event.stopPropagation(); // Empêche le clic de se propager à d'autres éléments
-    toggleProjetsDisplay(noeud, projetsContainer);
-  });
-
-  return nodeElement;
-}
-
-
-function toggleProjetsDisplay(noeud, container) {
-  // Ferme le conteneur actif s'il existe et est différent du conteneur actuel
-  if (activeProjetsContainer && activeProjetsContainer !== container) {
-    activeProjetsContainer.classList.remove("active");
-    activeProjetsContainer.innerHTML = "";
-  }
-
-  // Active ou désactive le conteneur actuel
-  if (container.classList.contains("active")) {
-    container.classList.remove("active");
-    container.innerHTML = "";
-    activeProjetsContainer = null; // Réinitialise le conteneur actif
-  } else {
-    container.classList.add("active");
-    container.innerHTML = `
-      <h4>Projets associés</h4>
-      ${noeud.projets.length > 0
-        ? noeud.projets
-            .map(
-              (projet) => `
-            <div class="projet">
-              <h5>${projet.titre}</h5>
-              <p>${projet.description}</p>
-              ${projet.lien ? `<a href="${projet.lien}" target="_blank">Voir plus</a>` : ""}
-            </div>
-          `
-            )
-            .join("")
-        : "<p>Aucun projet disponible</p>"}
-    `;
-    activeProjetsContainer = container; // Définit le conteneur actif
-  }
-}
-
-// Ferme les projets associés lorsqu'on clique en dehors
-document.addEventListener("click", () => {
-  if (activeProjetsContainer) {
-    activeProjetsContainer.classList.remove("active");
-    activeProjetsContainer.innerHTML = "";
-    activeProjetsContainer = null; // Réinitialise le conteneur actif
-  }
-});
-
-
+// Initialise le graphe avec tous les skills
 function initializeGraph() {
-  graphData.forEach((skill, index) => createCircle(skill, index)); // On passe l'index pour chaque skill
+  graphData.forEach((skill, index) => createCircle(skill, index));
   if (graphData.length > 0) {
     const firstCircle = document.querySelector(".circle");
     firstCircle.classList.add("selected");
@@ -202,29 +129,22 @@ function initializeGraph() {
 }
 
 initializeGraph();
-// Fonction pour ajuster l'opacité de l'overlay en fonction du scroll
 function adjustOverlayOnScroll() {
-  const overlay = document.getElementById("background-overlay");
-  const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight); // Pourcentage du scroll
-  const opacity = Math.min(0.7, scrollProgress * 0.7); // Limite l'opacité à 0.7
-
-  // Applique l'effet d'assombrissement sur l'overlay
+  const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+  const opacity = Math.min(0.7, scrollProgress * 0.7);
+  
+  // Ajuste l'opacité de l'overlay
   overlay.style.background = `rgba(0, 0, 0, ${opacity})`;
+
+  // Sélectionne le titre
+  const title = document.querySelector(".title-comp");
+
+  // Change la couleur du titre en fonction de l'opacité de l'overlay
+  if (opacity >= 0.4) {
+    title.style.color = "white"; // Titre en blanc quand l'overlay est sombre
+  } else {
+    title.style.color = ""; // Restaure la couleur par défaut quand l'overlay est plus clair
+  }
 }
 
-// Écouteur de l'événement scroll
 window.addEventListener("scroll", adjustOverlayOnScroll);
-
-// Applique un ajustement initial au chargement
-adjustOverlayOnScroll();
-// Exemple d'animation pour les éléments qui apparaissent au scroll
-ScrollReveal().reveal('.anim-scroll', {
-  distance: '50px',
-  duration: 800,
-  easing: 'ease-in-out',
-  opacity: 0,
-  reset: true, // Animation répétée à chaque passage dans la vue
-});
-
-
-

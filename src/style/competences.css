@@ -1,41 +1,38 @@
 #skills-container {
-  position: relative;
+  position: relative; /* Utilisation de relative au lieu d'absolute pour ne pas perturber le flow */
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Place les cercles au-dessus du background, mais en dessous du reste */
 }
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Jura', sans-serif;
-  position: relative;
-  height: 100vh; /* Assure que le body est toujours à hauteur de l'écran */
-  overflow-x: hidden; /* Empêche le défilement horizontal si jamais il y a des marges latérales */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100vh;
 }
 
 #background-overlay {
-  position: fixed; /* Assure que l'overlay couvre toute la page, même en scrollant */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0); /* On commence avec une opacité de 0 */
+  background: rgba(0, 0, 0, 0);
   transition: background 0.3s ease-in-out;
-  z-index: -1; /* L'overlay doit être derrière le contenu */
+  z-index: -1; /* L'overlay doit être derrière tout le contenu */
 }
 
-/* Conteneur de chaque branche */
-.branch-container {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Cercle principal */
 .circle {
-  position: relative;
+  position: absolute;
   width: 100px;
   height: 100px;
   background: transparent;
@@ -48,35 +45,17 @@ body {
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
-  border: 4px solid #4caf50; /* Premier contour */
-  box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.5); /* Deuxième contour (espacé) */
+  border: 1px solid white;
+  box-shadow: 0 0 0 1px white;
 }
 
 .circle.selected {
   transform: scale(1.2);
-  box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.7), 0 0 15px rgba(76, 175, 80, 0.9); /* Accentuation des contours */
+  box-shadow: 0 0 0 8px white, 0 0 15px white;
 }
 
-/* Nœud dépendant */
-.dependent-circle {
-  width: 150px;
-  height: auto;
-  background: transparent;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 0.8rem;
-  text-align: center;
-  cursor: pointer;
-  border: 2px solid #2196f3;
-  box-shadow: 0 0 0 6px rgba(33, 150, 243, 0.4);
-}
-
-
-/* Popup fixe */
 .fixed-popup {
+  position: absolute;
   top: 20px;
   right: 20px;
   width: 300px;
@@ -84,55 +63,12 @@ body {
   background: #f9f9f9;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  z-index: 2; /* Au-dessus des cercles */
 }
 
-.fixed-popup h2 {
-  margin: 0;
-  font-size: 1.5rem;
-}
+.branch{
 
-.fixed-popup p {
-  margin-top: 10px;
-  font-size: 1rem;
 }
-
-/* Notification pour les nœuds */
-.notification {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 20px;
-  height: 20px;
-  background: red;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-/* Conteneur pour les projets associés */
-.projets-container {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translate(10px, -50%);
-  width: 200px;
-  padding: 10px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  color: black;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 0.9rem;
-  display: none; /* Caché par défaut */
-}
-
-.projets-container.active {
-  display: block; /* Affiche les projets quand le nœud est sélectionné */
-}
-body {
-  transition: background-color 0.3s ease-in-out;
+.node{
+  
 }
