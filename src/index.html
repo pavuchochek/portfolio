@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: 'Jura', sans-serif;
-            
+
         }
     </style>
     <script src="./scripts/particles.js"></script>
@@ -38,10 +38,10 @@
                         <a href="contact.html" class="block py-2 pr-4 pl-3 text-white hover:text-gold">ME CONTACTER</a>
                     </li>
                     <li>
-                        <a href="competences.html" class="block py-2 pr-4 pl-3 text-white hover:text-gold">COMPETENCES</a>
+                        <a href="#competences" class="block py-2 pr-4 pl-3 text-white hover:text-gold">COMPETENCES</a>
                     </li>
                     <li>
-                        <a href="projets.html" class="block py-2 pr-4 pl-3 text-white hover:text-gold">PROJETS</a>
+                        <a href="#projets" class="block py-2 pr-4 pl-3 text-white hover:text-gold">PROJETS</a>
                     </li>
                     <li>
                         <a href="cv.html" class="block py-2 pr-4 pl-3 text-white hover:text-gold">MON CV</a>
@@ -71,13 +71,13 @@
                     </p>
                 </div>
             </div>
-    
+
             <!-- Colonne 1 -->
             <div>
                 <img src="./img/portfolio_inspiration_2.png" class="w-1/2 h-auto">
             </div>
-             <!-- Colonne 2 -->
-            
+            <!-- Colonne 2 -->
+
             <div class="flex flex-col space-y-28">
                 <div>
                     <div class="text-white font-bold flex justify-start items-center relative mb-4">
@@ -111,9 +111,9 @@
                     </ul>
                 </div>
             </div>
-    
-           
-    
+
+
+
             <!-- Colonne 3 -->
             <div class="flex flex-col space-y-8">
                 <div class="space-y-4">
@@ -125,35 +125,37 @@
                     <div class="bg-gold rounded-lg border border-black w-auto h-auto p-3">
                         <p class="p-3 text-xl text-center">
                             Ma maîtrise de l'architecture de code me permet de concevoir des structures élégantes,
-                            performantes et parfaitement adaptées aux besoins, transformant chaque projet en une œuvre technique et fonctionnelle.
+                            performantes et parfaitement adaptées aux besoins, transformant chaque projet en une œuvre
+                            technique et fonctionnelle.
                         </p>
                     </div>
                 </div>
                 <div class="flex flex-col justify-center items-center mt-60">
-                    <a class="bg-blue_background text-white p-5 w-72 m-3 text-2xl hover:animate-blink inline-block text-center" href="projets.html">VOIR MES PROJETS</a>
-                    <a class="bg-gold p-5 w-72 m-3 text-2xl hover:animate-blink inline-block text-center" href="parcours.html">VOIR MON PARCOURS</a>
+                    <a class="bg-blue_background text-white p-5 w-72 m-3 text-2xl hover:animate-blink inline-block text-center"
+                        href="#projets">VOIR MES PROJETS</a>
+                    <a class="bg-gold p-5 w-72 m-3 text-2xl hover:animate-blink inline-block text-center"
+                        href="cv.html">VOIR MON CV</a>
                 </div>
             </div>
         </div>
-        <div >
+        <div id="competences">
             <div class="title-comp text-center text-4xl font-bold mt-20 anim-scroll">
                 <p>Competences techniques</p>
             </div>
             <div id="graph-container " class="anim-scroll">
 
-                <div id="skills-container"></div>
+                <div id="skills-container"><div id="description" class="description"></div>
 
-                <div id="skill-details" class="fixed-popup">
-                  <h2 id="skill-title">Titre</h2>
-                  <p id="skill-description">Description</p>
-                </div>
-                <div id="projets-sidebar"></div>
                 
-              </div>
+                </div>
+                <div id="project-container"></div>
+
+            </div>
             <script src="./scripts/competences.js"></script>
         </div>
+        
     </main>
-    
+
 </body>
 
 </html>
