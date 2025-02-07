@@ -15,14 +15,14 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: transparent;
+  background-color: #353E5D;
   color: white;
   text-align: center;
   line-height: 120px;
   font-weight: bold;
   font-size: 18px;
   z-index: 1;  /* Assure que le skill est au-dessus des branches */
-  border: 2px solid white;  /* Bordure blanche extérieure */
+  border: 2px solid #B29988;  /* Bordure blanche extérieure */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);  /* Ombre douce autour du cercle */
   transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Transition douce pour le zoom */
 }
@@ -60,10 +60,11 @@
 
 /* Style des nœuds (petits cercles) */
 .node {
+  position:relative;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #2ecc71;
+  background-color: #353e5da8;
   color: white;
   text-align: center;
   line-height: 60px;
@@ -78,6 +79,13 @@
 
 .node:active {
   transform: scale(0.95);  /* Effet de contraction au clic */
+}
+
+.node.selected{
+  background-color: #353E5D;
+  transform: scale(1.1);  /* Exemple d'effet de zoom */
+  transition: transform 0.3s ease;  /* Animation douce pour le zoom */
+
 }
 
 /* Ajouter des animations aux branches */
@@ -101,9 +109,11 @@ svg line {
   stroke-width: 2;
 }
 .circle.selected {
-  border: 5px solid #ff5733;  /* Exemple de bordure pour la sélection */
+  background-color: #B29988;
+  border: 2px solid #353E5D;  /* Exemple de bordure pour la sélection */
   transform: scale(1.1);  /* Exemple d'effet de zoom */
   transition: transform 0.3s ease;  /* Animation douce pour le zoom */
+  
 }
 
 .description {
@@ -134,7 +144,7 @@ svg line {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #e74c3c;
+  background-color: #B29988;
   color: white;
   font-size: 12px;
   font-weight: bold;
@@ -142,4 +152,22 @@ svg line {
   justify-content: center;
   align-items: center;
   z-index: 3;
+}
+.project_background{
+  background-color: white;
+  width:25%;
+  padding: 2%;
+  border-radius: 3%;
+}
+.lien_projet{
+  color: #353E5D;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration: none;
+}
+.titre_projet{
+  color: #353E5D;
+  margin-bottom: 1%;
+  font-size: 25px;
+  font-weight: bold;
 }

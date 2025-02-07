@@ -1,75 +1,3 @@
-const skillsContainer = document.getElementById("skills-container");
-const overlay = document.getElementById("background-overlay");
-
-// Fonction pour calculer la position d'un hexagone autour du centre
-function calculateHexagonPosition(index, radius) {
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-  const hexagonAngles = [0, Math.PI / 3, 2 * Math.PI / 3, Math.PI, 4 * Math.PI / 3, 5 * Math.PI / 3];
-  const angle = hexagonAngles[index % hexagonAngles.length];
-  return { x: centerX + radius * Math.cos(angle), y: centerY + radius * Math.sin(angle) };
-}
-
-// Créer un cercle (skill)
-function createCircle(skill, index) {
-  const { x, y } = calculateHexagonPosition(index, 400);  // Rayon de 200 pour les skills
-  const circle = document.createElement("div");
-  circle.className = "circle";
-  circle.style.left = `${x - 50}px`;
-  circle.style.top = `${y - 50}px`;
-  circle.innerText = skill.title;
-  skillsContainer.appendChild(circle);
-
-  if (skill.noeuds) createBranch(skill, index); // Créer la branche du skill, contenant les nœuds
-}
-
-function createBranch(skill, indexOfSkill) {
-  const branch = document.createElement("div");
-  branch.className = "branch";
-
-  const { x, y } = calculateHexagonPosition(indexOfSkill, 300);  // Positionnement de la branche
-  branch.style.left = `${x - 50}px`;
-  branch.style.top = `${y - 50}px`;
-
-  // Applique la direction des branches (exemple simplifié)
-  const directions = [
-    { xOffset: 0, yOffset: 0, direction: 'column' },
-    { xOffset: 0, yOffset: 0, direction: 'row' },
-    { xOffset: 0, yOffset: 0, direction: 'row' },
-    { xOffset: 0, yOffset: 0, direction: 'column' },
-    { xOffset: 0, yOffset: 0, direction: 'row' },
-    { xOffset: 0, yOffset: 0, direction: 'row' }
-  ];
-
-  const { xOffset, yOffset, direction } = directions[indexOfSkill % directions.length];
-  branch.style.left = `${x - 50 + xOffset}px`;
-  branch.style.top = `${y - 50 + yOffset}px`;
-  branch.classList.add(direction);
-
-  skillsContainer.appendChild(branch);
-
-  // Ajouter les nœuds à la branche
-  if (skill.noeuds && skill.noeuds.length > 0) {
-    skill.noeuds.forEach((noeud, index) => {
-      const node = document.createElement("div");
-      node.className = "node";
-      node.innerText = noeud.title;
-
-      // Vérifier s'il y a des projets et ajouter un badge
-      if (noeud.projets && noeud.projets.length > 0) {
-        const badge = document.createElement('div');
-        badge.classList.add('badge');
-        badge.textContent = noeud.projets.length;
-        node.appendChild(badge);
-      }
-
-      // Ajouter l'événement de sélection du nœud
-      node.addEventListener('click', () => showNodeProjects(noeud));
-
-      branch.appendChild(node);
-    });
-  }
-}
 
 
 const graphData = [
@@ -218,7 +146,7 @@ const graphData = [
     description: 'Maintenance et évolution de logiciels, en assurant la qualité et la performance à long terme avec des outils comme SonarQube et Spring.',
     noeuds: [
       { 
-        title: 'SonarQube',
+        title: 'Sonar',
         projets: [
           {
             titre: 'Analyse de code avec SonarQube',
@@ -254,20 +182,105 @@ const graphData = [
   }
 ];
 
+const skillsContainer = document.getElementById("skills-container");
+
+// Fonction pour calculer la position d'un hexagone autour du centre
+function calculateHexagonPosition(index, radius) {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  const hexagonAngles = [0, Math.PI / 3, 2 * Math.PI / 3, Math.PI, 4 * Math.PI / 3, 5 * Math.PI / 3];
+  const angle = hexagonAngles[index % hexagonAngles.length];
+  return { x: centerX + radius * Math.cos(angle), y: centerY + radius * Math.sin(angle) };
+}
+
+// Créer un cercle (skill)
+function createCircle(skill, index) {
+  const { x, y } = calculateHexagonPosition(index, 400);  // Rayon de 200 pour les skills
+  const circle = document.createElement("div");
+  circle.className = "circle";
+  circle.style.left = `${x - 50}px`;
+  circle.style.top = `${y - 50}px`;
+  circle.innerText = skill.title;
+  skillsContainer.appendChild(circle);
+
+  if (skill.noeuds) createBranch(skill, index); // Créer la branche du skill, contenant les nœuds
+}
+
+function createBranch(skill, indexOfSkill) {
+  const branch = document.createElement("div");
+  branch.className = "branch";
+
+  const { x, y } = calculateHexagonPosition(indexOfSkill, 600);  // Positionnement de la branche
+  branch.style.left = `${x - 50}px`;
+  branch.style.top = `${y - 50}px`;
+
+  // Applique la direction des branches (exemple simplifié)
+  const directions = [
+    { xOffset: 0, yOffset: 0, direction: 'column' },
+    { xOffset: 0, yOffset: 0, direction: 'row' },
+    { xOffset: 0, yOffset: 0, direction: 'row' },
+    { xOffset: 0, yOffset: 0, direction: 'column' },
+    { xOffset: 0, yOffset: 0, direction: 'row' },
+    { xOffset: 0, yOffset: 0, direction: 'row' }
+  ];
+
+  const { xOffset, yOffset, direction } = directions[indexOfSkill % directions.length];
+  branch.style.left = `${x - 50 + xOffset}px`;
+  branch.style.top = `${y - 50 + yOffset}px`;
+  branch.classList.add(direction);
+
+  skillsContainer.appendChild(branch);
+
+  // Ajouter les nœuds à la branche
+  if (skill.noeuds && skill.noeuds.length > 0) {
+    skill.noeuds.forEach((noeud, index) => {
+      const node = document.createElement("div");
+      node.className = "node";
+      node.innerText = noeud.title;
+
+      // Vérifier s'il y a des projets et ajouter un badge
+      if (noeud.projets && noeud.projets.length > 0) {
+        const badge = document.createElement('div');
+        badge.classList.add('badge');
+        badge.textContent = noeud.projets.length;
+        node.appendChild(badge);
+      }
+
+      // Ajouter l'événement de sélection du nœud
+      node.addEventListener('click', () => showNodeProjects(noeud));
+
+      branch.appendChild(node);
+    });
+  }
+}
+
 
 // Fonction pour afficher les projets du nœud sélectionné
 function showNodeProjects(node) {
   const projectContainer = document.getElementById("project-container");
   projectContainer.innerHTML = ''; // Vide le conteneur des projets
-
+  //enlever tout les selected des nodes
+  const nodes = document.querySelectorAll('.node');
+  nodes.forEach(node => node.classList.remove('selected'));
+  //ajouter la classe selected au node selectionné
+  event.target.classList.add('selected');
   if (node.projets && node.projets.length > 0) {
     node.projets.forEach(project => {
       const projectElement = document.createElement("div");
       projectElement.classList.add('project');
+      projectElement.classList.add('project_background');
+
 
       const projectTitle = document.createElement("h3");
-      projectTitle.textContent = project.title;
+      projectTitle.textContent = project.titre;
+      projectTitle.classList.add('titre_projet');
       projectElement.appendChild(projectTitle);
+      
+      const projectImage = document.createElement("img");
+      projectImage.src = project.image;
+      projectImage.alt = project.title;
+      projectImage.classList.add('project-image');
+      projectElement.appendChild(projectImage);
 
       const projectDescription = document.createElement("p");
       projectDescription.textContent = project.description;
@@ -277,13 +290,10 @@ function showNodeProjects(node) {
       projectLink.href = project.lien;
       projectLink.target = "_blank";
       projectLink.textContent = "Voir le projet";
+      projectLink.classList.add('lien_projet');
       projectElement.appendChild(projectLink);
 
-      const projectImage = document.createElement("img");
-      projectImage.src = project.image;
-      projectImage.alt = project.title;
-      projectImage.classList.add('project-image');
-      projectElement.appendChild(projectImage);
+      
 
       projectContainer.appendChild(projectElement);
     });
@@ -294,25 +304,7 @@ function showNodeProjects(node) {
 function initializeGraph() {
   graphData.forEach((skill, index) => createCircle(skill, index));
 }
-function adjustOverlayOnScroll() {
-  const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-  const opacity = Math.min(0.7, scrollProgress * 0.7);
 
-  // Ajuste l'opacité de l'overlay
-  overlay.style.background = `rgba(0, 0, 0, ${opacity})`;
-
-  // Sélectionne le titre
-  const title = document.querySelector(".title-comp");
-
-  // Change la couleur du titre en fonction de l'opacité de l'overlay
-  if (opacity >= 0.4) {
-    title.style.color = "white"; // Titre en blanc quand l'overlay est sombre
-  } else {
-    title.style.color = ""; // Restaure la couleur par défaut quand l'overlay est plus clair
-  }
-}
-
-window.addEventListener("scroll", adjustOverlayOnScroll);
 // Fonction pour afficher la description du skill sélectionné et mettre en évidence le cercle
 function showDescription(skillIndex) {
   const descriptionElement = document.getElementById("description");
