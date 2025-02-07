@@ -1,5 +1,4 @@
-
-
+document.body.classList.remove('no-js');
 const graphData = [
   {
     title: 'Analyser', 
@@ -11,8 +10,19 @@ const graphData = [
           {
             titre: 'Analyse de données avec Python',
             description: 'Développement d\'une application Python pour analyser des ensembles de données complexes.',
-            lien: 'https://github.com/moncompte/projet-python',
+            lien: 'https://github.com/pavuchochek/projet-python',
             image: 'https://via.placeholder.com/150'
+          }
+        ]
+      },
+      { 
+        title: 'Cybersécurité',
+        projets: [
+          {
+            titre: 'Stage Analyste SOC',
+            description: 'Identification, analyse et détection des attaques de phishing dans un environnement de cybersécurité.',
+            lien: 'https://groupetrefle.com/fr/trefle-solution',
+            image: 'img/projects/trefle.png'
           }
         ]
       }
@@ -20,55 +30,45 @@ const graphData = [
   },
   {
     title: 'Concevoir', 
-    description: 'Conception de systèmes, applications et architectures logicielles avec des technologies modernes comme Java et React.',
+    description: 'Conception de systèmes, applications et architectures logicielles avec des technologies modernes comme Java et Kotlin.',
     noeuds: [
       { 
         title: 'Java',
         projets: [
           {
-            titre: 'Application de gestion en Java',
-            description: 'Création d\'une application de gestion de tâches avec Java, utilisant une architecture MVC.',
-            lien: 'https://github.com/moncompte/projet-java',
-            image: 'https://via.placeholder.com/150'
+            titre: 'Application de gestion de tournoi E-Sport',
+            description: 'Optimisation et structuration de l\'application avec des design patterns, MVC, DAO et Java Derby.',
+            lien: 'https://github.com/pavuchochek/TESM-ESPORT-MANAGER',
+            image: 'img/projects/tesm.png'
           }
         ]
       },
-      { 
-        title: 'React',
-        projets: [
-          {
-            titre: 'Site Web React',
-            description: 'Création d\'un site web interactif utilisant React, avec gestion de l\'état via Redux.',
-            lien: 'https://github.com/moncompte/projet-react',
-            image: 'https://via.placeholder.com/150'
-          }
-        ]
-      }
+      
     ]
   },
   {
     title: 'Développer', 
-    description: 'Développement de logiciels robustes et performants avec des technologies comme Node.js et SQL.',
+    description: 'Développement de logiciels robustes et performants avec des technologies comme PHP, C, et JavaScript.',
     noeuds: [
       { 
-        title: 'Node.js',
+        title: 'PHP',
         projets: [
           {
-            titre: 'API REST avec Node.js',
-            description: 'Développement d\'une API RESTful avec Node.js et Express.',
-            lien: 'https://github.com/moncompte/projet-nodejs',
-            image: 'https://via.placeholder.com/150'
+            titre: 'API REST pour un cabinet médical',
+            description: 'Implémentation des fonctionnalités CRUD en PHP avec gestion des erreurs HTTP.',
+            lien: 'https://github.com/pavuchochek/ClientCabinet',
+            image: 'img/projects/cabinet.png'
           }
         ]
       },
       { 
-        title: 'SQL',
+        title: 'JavaScript',
         projets: [
           {
-            titre: 'Base de données avec SQL',
-            description: 'Création et gestion d\'une base de données relationnelle avec SQL pour une application de gestion de stocks.',
-            lien: 'https://github.com/moncompte/projet-sql',
-            image: 'https://via.placeholder.com/150'
+            titre: 'Projet interactif en JavaScript',
+            description: 'Création d\'une interface interactive pour la gestion d\'applications.',
+            lien: 'https://github.com/pavuchochek/chatAjax',
+            image: 'img/projects/chat.png'
           }
         ]
       }
@@ -79,35 +79,13 @@ const graphData = [
     description: 'Intégration de différentes technologies et systèmes pour garantir leur bon fonctionnement ensemble.',
     noeuds: [
       { 
-        title: 'CI/CD',
-        projets: [
-          {
-            titre: 'Pipeline CI/CD avec Jenkins',
-            description: 'Mise en place d\'un pipeline d\'intégration continue et de déploiement continu avec Jenkins.',
-            lien: 'https://github.com/moncompte/projet-cicd',
-            image: 'https://via.placeholder.com/150'
-          }
-        ]
-      },
-      { 
-        title: 'Jenkins',
-        projets: [
-          {
-            titre: 'Automatisation de tests avec Jenkins',
-            description: 'Automatisation des tests unitaires et fonctionnels à l\'aide de Jenkins et des plugins associés.',
-            lien: 'https://github.com/moncompte/projet-jenkins',
-            image: 'https://via.placeholder.com/150'
-          }
-        ]
-      },
-      { 
         title: 'Docker',
         projets: [
           {
             titre: 'Application conteneurisée avec Docker',
-            description: 'Création d\'une application conteneurisée avec Docker pour une meilleure gestion des environnements de développement et de production.',
-            lien: 'https://github.com/moncompte/projet-docker',
-            image: 'https://via.placeholder.com/150'
+            description: 'Création d\'une application conteneurisée pour la gestion des environnements de développement.',
+            lien: 'https://github.com/pavuchochek/chatAjax',
+            image: 'img/projects/docker.png'
           }
         ]
       }
@@ -115,27 +93,27 @@ const graphData = [
   },
   {
     title: 'Tester', 
-    description: 'Vérification de la qualité du code et des fonctionnalités via des tests automatisés et manuels, incluant des outils comme JUnit.',
+    description: 'Vérification de la qualité du code et des fonctionnalités via des tests automatisés et manuels.',
     noeuds: [
       { 
-        title: 'JUnit',
+        title: 'Postman',
         projets: [
           {
-            titre: 'Tests unitaires avec JUnit',
-            description: 'Développement de tests unitaires pour une application Java en utilisant JUnit pour garantir la qualité du code.',
-            lien: 'https://github.com/moncompte/projet-junit',
+            titre: 'Tests d\'API avec Postman',
+            description: 'Documentation automatisée et tests des fonctionnalités API.',
+            lien: 'https://github.com/pavuchochek/projet-postman',
             image: 'https://via.placeholder.com/150'
           }
         ]
       },
       { 
-        title: 'CI/CD',
+        title: 'JUnit',
         projets: [
           {
-            titre: 'Tests automatisés en CI/CD',
-            description: 'Intégration des tests automatisés dans un pipeline CI/CD pour une livraison continue de qualité.',
-            lien: 'https://github.com/moncompte/projet-cicd-tests',
-            image: 'https://via.placeholder.com/150'
+            titre: 'Tests unitaires avec JUnit',
+            description: 'Développement de tests unitaires pour garantir la qualité du code Java.',
+            lien: 'https://github.com/pavuchochek/projet-junit',
+            image: 'img/projects/tesm².png'
           }
         ]
       }
@@ -143,38 +121,27 @@ const graphData = [
   },
   {
     title: 'Maintenir', 
-    description: 'Maintenance et évolution de logiciels, en assurant la qualité et la performance à long terme avec des outils comme SonarQube et Spring.',
+    description: 'Maintenance et évolution de logiciels, en assurant la qualité et la performance à long terme avec des outils comme SonarQube et Git.',
     noeuds: [
       { 
-        title: 'Sonar',
+        title: 'SonarQube',
         projets: [
           {
             titre: 'Analyse de code avec SonarQube',
-            description: 'Utilisation de SonarQube pour l\'analyse de la qualité du code et l\'identification des problèmes de performance.',
-            lien: 'https://github.com/moncompte/projet-sonarqube',
-            image: 'https://via.placeholder.com/150'
+            description: 'Utilisation de SonarQube pour l\'analyse de la qualité du code.',
+            lien: 'https://github.com/pavuchochek/projet-sonarqube',
+            image: 'img/projects/sonar.png'
           }
         ]
       },
       { 
-        title: 'Spring',
+        title: 'Spring Boot',
         projets: [
           {
-            titre: 'Application Spring Boot',
-            description: 'Développement d\'une application web avec Spring Boot, y compris la gestion des dépendances et la configuration des services.',
-            lien: 'https://github.com/moncompte/projet-spring',
-            image: 'https://via.placeholder.com/150'
-          }
-        ]
-      },
-      { 
-        title: 'Git',
-        projets: [
-          {
-            titre: 'Gestion de version avec Git',
-            description: 'Utilisation de Git pour la gestion de version d\'une application, y compris les branches et les pull requests.',
-            lien: 'https://github.com/moncompte/projet-git',
-            image: 'https://via.placeholder.com/150'
+            titre: 'Applications Spring Boot en Kotlin',
+            description: 'Développement de deux applications web avec Spring Boot et Kotlin, gestion des dépendances et configuration des services.',
+            lien: 'https://www.irit.fr/plateformes/elaastic/',
+            image: 'img/projects/elaastic_logo.webp'
           }
         ]
       }
@@ -247,23 +214,57 @@ function createBranch(skill, indexOfSkill) {
       }
 
       // Ajouter l'événement de sélection du nœud
-      node.addEventListener('click', () => showNodeProjects(noeud));
+      node.addEventListener('click', (event) => showNodeProjects(noeud, event));
 
       branch.appendChild(node);
     });
   }
 }
 
+// Fonction pour vérifier si le nœud appartient au skill sélectionné
+function isNodeInSelectedSkill(nodeTitle, selectedSkillTitle) {
+  const selectedSkill = graphData.find(skill => skill.title === selectedSkillTitle);
+  return selectedSkill && selectedSkill.noeuds.some(noeud => noeud.title === nodeTitle);
+}
 
 // Fonction pour afficher les projets du nœud sélectionné
-function showNodeProjects(node) {
+function showNodeProjects(node, event) {
   const projectContainer = document.getElementById("project-container");
   projectContainer.innerHTML = ''; // Vide le conteneur des projets
-  //enlever tout les selected des nodes
+
+  // Enlever tous les 'selected' des nodes
   const nodes = document.querySelectorAll('.node');
   nodes.forEach(node => node.classList.remove('selected'));
-  //ajouter la classe selected au node selectionné
+
+  // Ajouter la classe 'selected' au node sélectionné
   event.target.classList.add('selected');
+
+  const selectedSkillElement = document.querySelector('.circle.selected');
+  const selectedSkillTitle = selectedSkillElement ? selectedSkillElement.innerText : '';
+
+  // Vérifie si le node appartient au skill sélectionné
+  if (!isNodeInSelectedSkill(node.title, selectedSkillTitle)) {
+    const newSkillElement = Array.from(document.querySelectorAll('.circle')).find(skill => {
+      return graphData.find(s => s.title === skill.innerText).noeuds.some(n => n.title === node.title);
+    });
+
+    if (newSkillElement) {
+      // Enlever la classe 'selected' de tous les skills
+      document.querySelectorAll('.circle').forEach(skill => skill.classList.remove('selected'));
+
+      // Ajouter la classe 'selected' au nouveau skill
+      newSkillElement.classList.add('selected');
+
+      // Afficher la description du nouveau skill
+      showDescription(graphData.findIndex(skill => skill.title === newSkillElement.innerText));
+
+      // Enlever la classe 'selected' de tous les nodes
+      nodes.forEach(node => node.classList.remove('selected'));
+
+      // Ajouter la classe 'selected' au node sélectionné
+      event.target.classList.add('selected');
+    }
+  }
   if (node.projets && node.projets.length > 0) {
     node.projets.forEach(project => {
       const projectElement = document.createElement("div");
@@ -278,7 +279,7 @@ function showNodeProjects(node) {
       
       const projectImage = document.createElement("img");
       projectImage.src = project.image;
-      projectImage.alt = project.title;
+      projectImage.alt = project.titre;
       projectImage.classList.add('project-image');
       projectElement.appendChild(projectImage);
 
@@ -320,6 +321,10 @@ function showDescription(skillIndex) {
   // Ajouter la classe 'selected' au cercle correspondant
   skills[skillIndex].classList.add('selected');
 
+  //reset tout les nodes selected
+  const nodes = document.querySelectorAll('.node');
+  nodes.forEach(node => node.classList.remove('selected'));
+
   // Afficher le texte de la description au centre du skill container
   descriptionElement.style.display = 'block';  // Afficher la description
 }
@@ -342,7 +347,48 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function adjustOverlayOnScroll() {
+  const overlay = document.getElementById("background-overlay");
+  const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight); // Pourcentage du scroll
+  const opacity = Math.min(0.7, scrollProgress * 0.7); // Limite l'opacité à 0.7
+
+  // Applique l'effet d'assombrissement sur l'overlay
+  overlay.style.background = `rgba(0, 0, 0, ${opacity})`;
+}
+
+function adjustNavBackground() {
+  const nav = document.querySelector('nav');
+  const scrollPosition = window.scrollY;
+  const windowHeight = window.innerHeight;
+
+  // Calculer l'intensité de l'assombrissement en fonction du scroll
+  const darkness = Math.min(scrollPosition / windowHeight, 0.7); // Limiter l'assombrissement à 0.7 maximum
+
+  // Définir les couleurs initiales (53, 62, 93)
+  const r = 53 - darkness * 50; // Réduire le rouge pour assombrir
+  const g = 62 - darkness * 50; // Réduire le vert pour assombrir
+  const b = 93 - darkness * 50; // Réduire le bleu pour assombrir
+
+  // S'assurer que les valeurs RGB ne deviennent pas négatives
+  const rClamped = Math.max(r, 0);
+  const gClamped = Math.max(g, 0);
+  const bClamped = Math.max(b, 0);
+
+  // Appliquer la nouvelle couleur de fond
+  nav.style.backgroundColor = `rgb(${rClamped}, ${gClamped}, ${bClamped})`;
+}
+
+// Ajouter l'événement de scroll
+window.addEventListener('scroll', adjustNavBackground);
+
+
+
+// Ajouter l'événement de scroll
+window.addEventListener('scroll', adjustNavBackground);
 
 
 
 initializeGraph();
+
+// Écouteur de l'événement scroll
+window.addEventListener("scroll", adjustOverlayOnScroll);

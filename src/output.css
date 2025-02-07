@@ -988,6 +988,11 @@ video {
   line-height: 1.75rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -998,6 +1003,11 @@ video {
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.text-blue_background {
+  --tw-text-opacity: 1;
+  color: rgb(53 62 93 / var(--tw-text-opacity, 1));
 }
 
 .text-white {
